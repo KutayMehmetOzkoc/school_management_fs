@@ -13,6 +13,8 @@ import com.school.course.mapper.CourseMapper;
 import com.school.course.repository.CourseRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -29,6 +31,7 @@ public class CourseService {
     private final CourseMapper courseMapper;
     private final CourseEventProducer eventProducer;
 
+    @CacheEvict(value = {"course", "coursesByTeacher"}, allEntries = true)
     @Transactional
     public CourseResponse createCourse(CreateCourseRequest request) {
         if (courseRepository.existsByCode(request.getCode())) {
@@ -45,6 +48,7 @@ public class CourseService {
         return courseMapper.toResponse(saved);
     }
 
+    @Cacheable(value = "course", key = "#id")
     @Transactional(readOnly = true)
     public CourseResponse getCourseById(Long id) {
         return courseRepository.findById(id)
@@ -62,6 +66,7 @@ public class CourseService {
         return courseRepository.findAvailableCourses(pageable).map(courseMapper::toResponse);
     }
 
+    @Cacheable(value = "coursesByTeacher", key = "#teacherId")
     @Transactional(readOnly = true)
     public List<CourseResponse> getCoursesByTeacher(Long teacherId) {
         return courseRepository.findByTeacherId(teacherId)
@@ -70,6 +75,7 @@ public class CourseService {
                 .toList();
     }
 
+    @CacheEvict(value = {"course", "coursesByTeacher"}, allEntries = true)
     @Transactional
     public CourseResponse updateCourse(Long id, UpdateCourseRequest request) {
         Course course = courseRepository.findById(id)
@@ -83,6 +89,7 @@ public class CourseService {
         return courseMapper.toResponse(courseRepository.save(course));
     }
 
+    @CacheEvict(value = {"course", "coursesByTeacher"}, allEntries = true)
     @Transactional
     public void closeCourse(Long id) {
         Course course = courseRepository.findById(id)

@@ -29,13 +29,7 @@ public class EnrollmentResponseConsumer {
             Acknowledgment acknowledgment) {
 
         log.info("Received EnrollmentResponseEvent: sagaId={}, approved={}", event.getSagaId(), event.isApproved());
-
-        try {
-            enrollmentSaga.handleResponse(event);
-            acknowledgment.acknowledge();
-        } catch (Exception ex) {
-            log.error("Error handling enrollment response: sagaId={}", event.getSagaId(), ex);
-            // Don't acknowledge — will be retried by Kafka consumer
-        }
+        enrollmentSaga.handleResponse(event);
+        acknowledgment.acknowledge();
     }
 }

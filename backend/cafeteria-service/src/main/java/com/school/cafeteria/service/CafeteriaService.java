@@ -7,6 +7,8 @@ import com.school.cafeteria.exception.MenuItemNotFoundException;
 import com.school.cafeteria.mapper.MenuItemMapper;
 import com.school.cafeteria.repository.MenuItemRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,12 +22,14 @@ public class CafeteriaService {
     private final MenuItemRepository menuItemRepository;
     private final MenuItemMapper menuItemMapper;
 
+    @CacheEvict(value = {"dailyMenu", "weeklyMenu"}, allEntries = true)
     @Transactional
     public MenuItemResponse addMenuItem(MenuItemRequest request) {
         MenuItem item = menuItemMapper.toEntity(request);
         return menuItemMapper.toResponse(menuItemRepository.save(item));
     }
 
+    @Cacheable(value = "weeklyMenu", key = "#weekStart")
     @Transactional(readOnly = true)
     public List<MenuItemResponse> getWeeklyMenu(LocalDate weekStart) {
         LocalDate weekEnd = weekStart.plusDays(6);
@@ -35,6 +39,7 @@ public class CafeteriaService {
                 .toList();
     }
 
+    @Cacheable(value = "dailyMenu", key = "#date")
     @Transactional(readOnly = true)
     public List<MenuItemResponse> getDailyMenu(LocalDate date) {
         return menuItemRepository.findByMenuDateOrderByMealTypeAsc(date)
@@ -43,6 +48,7 @@ public class CafeteriaService {
                 .toList();
     }
 
+    @CacheEvict(value = {"dailyMenu", "weeklyMenu"}, allEntries = true)
     @Transactional
     public void deleteMenuItem(Long id) {
         if (!menuItemRepository.existsById(id)) {
