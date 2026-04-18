@@ -1,0 +1,14 @@
+/Users/kutaymehmetozko/Desktop/repos/school_management_system/backend/auth-service/src/main/java/com/school/auth/dto/AuthResponse.java
+/Users/kutaymehmetozko/Desktop/repos/school_management_system/backend/auth-service/src/main/java/com/school/auth/repository/UserRepository.java
+/Users/kutaymehmetozko/Desktop/repos/school_management_system/backend/auth-service/src/main/java/com/school/auth/security/JwtService.java
+/Users/kutaymehmetozko/Desktop/repos/school_management_system/backend/auth-service/src/main/java/com/school/auth/exception/GlobalExceptionHandler.java
+/Users/kutaymehmetozko/Desktop/repos/school_management_system/backend/auth-service/src/main/java/com/school/auth/config/SecurityConfig.java
+/Users/kutaymehmetozko/Desktop/repos/school_management_system/backend/auth-service/src/main/java/com/school/auth/controller/AuthController.java
+/Users/kutaymehmetozko/Desktop/repos/school_management_system/backend/auth-service/src/main/java/com/school/auth/exception/DuplicateEmailException.java
+/Users/kutaymehmetozko/Desktop/repos/school_management_system/backend/auth-service/src/main/java/com/school/auth/dto/LoginRequest.java
+/Users/kutaymehmetozko/Desktop/repos/school_management_system/backend/auth-service/src/main/java/com/school/auth/dto/RegisterRequest.java
+/Users/kutaymehmetozko/Desktop/repos/school_management_system/backend/auth-service/src/main/java/com/school/auth/service/AuthService.java
+/Users/kutaymehmetozko/Desktop/repos/school_management_system/backend/auth-service/src/main/java/com/school/auth/entity/User.java
+/Users/kutaymehmetozko/Desktop/repos/school_management_system/backend/auth-service/src/main/java/com/school/auth/entity/Role.java
+/Users/kutaymehmetozko/Desktop/repos/school_management_system/backend/auth-service/src/main/java/com/school/auth/exception/InvalidCredentialsException.java
+/Users/kutaymehmetozko/Desktop/repos/school_management_system/backend/auth-service/src/main/java/com/school/auth/AuthServiceApplication.java

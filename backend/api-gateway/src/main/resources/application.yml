@@ -1,0 +1,63 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: auth-service
+          uri: lb://auth-service
+          predicates:
+            - Path=/api/auth/**
+          filters:
+            - StripPrefix=0
+
+        - id: course-service
+          uri: lb://course-service
+          predicates:
+            - Path=/api/courses/**
+          filters:
+            - AuthenticationFilter
+
+        - id: enrollment-service
+          uri: lb://enrollment-service
+          predicates:
+            - Path=/api/enrollments/**
+          filters:
+            - AuthenticationFilter
+
+        - id: grade-service
+          uri: lb://grade-service
+          predicates:
+            - Path=/api/grades/**
+          filters:
+            - AuthenticationFilter
+
+        - id: cafeteria-service
+          uri: lb://cafeteria-service
+          predicates:
+            - Path=/api/cafeteria/**
+          filters:
+            - AuthenticationFilter
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka/
+  instance:
+    prefer-ip-address: true
+
+jwt:
+  secret: ${JWT_SECRET:school-management-secret-key-256-bits-long}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,gateway

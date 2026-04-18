@@ -1,0 +1,3 @@
+com/school/gateway/filter/AuthenticationFilter$Config.class
+com/school/gateway/config/GatewayApplication.class
+com/school/gateway/filter/AuthenticationFilter.class

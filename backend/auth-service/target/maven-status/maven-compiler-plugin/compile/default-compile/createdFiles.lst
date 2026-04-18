@@ -1,0 +1,16 @@
+com/school/auth/exception/InvalidCredentialsException.class
+com/school/auth/repository/UserRepository.class
+com/school/auth/security/JwtService.class
+com/school/auth/AuthServiceApplication.class
+com/school/auth/exception/GlobalExceptionHandler.class
+com/school/auth/entity/Role.class
+com/school/auth/entity/User.class
+com/school/auth/dto/LoginRequest.class
+com/school/auth/entity/User$UserBuilder.class
+com/school/auth/controller/AuthController.class
+com/school/auth/dto/AuthResponse.class
+com/school/auth/exception/DuplicateEmailException.class
+com/school/auth/config/SecurityConfig.class
+com/school/auth/dto/AuthResponse$AuthResponseBuilder.class
+com/school/auth/dto/RegisterRequest.class
+com/school/auth/service/AuthService.class
