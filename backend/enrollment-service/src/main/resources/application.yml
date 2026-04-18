@@ -41,6 +41,10 @@ kafka:
     enrollment-request: enrollment-request-topic
     enrollment-response: enrollment-response-topic
 
+logstash:
+  host: ${LOGSTASH_HOST:localhost}
+  port: ${LOGSTASH_PORT:5000}
+
 management:
   endpoints:
     web:
@@ -52,7 +56,3 @@ management:
   zipkin:
     tracing:
       endpoint: ${MANAGEMENT_ZIPKIN_TRACING_ENDPOINT:http://zipkin:9411/api/v2/spans}
-
-logging:
-  level:
-    com.school.enrollment: DEBUG
